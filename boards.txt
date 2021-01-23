@@ -1,0 +1,22 @@
+# See: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
+
+menu.pnum=Board part number
+
+menu.xserial=U(S)ART support
+
+menu.opt=Optimize
+menu.rtlib=C Runtime Library
+menu.upload_method=Upload method
+
+################################################################################
+# Raspberry Pi Pico boards
+
+Pico.name=Pico
+Pico.build.core=arduino
+Pico.build.board=rp2040
+
+Pico.menu.pnum.rp2040=Pico rp2040
+Pico.menu.pnum.rp2040.upload.maximum_size=2048000
+Pico.menu.pnum.rp2040.upload.maximum_data_size=256000
+Pico.menu.pnum.rp2040.build.mcu=cortex-m0plus
+Pico.menu.pnum.rp2040.build.variant=rp2040

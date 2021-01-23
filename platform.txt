@@ -1,0 +1,116 @@
+# Raspberry Pi Pico ARM Core and platform.
+# ------------------------------
+#
+# For more info:
+# https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
+
+name=Raspberry Pi Pico Boards (selected from submenu)
+version=0.0.1
+
+# pico compile variables
+# ----------------------
+compiler.pico.extra_include="-I{build.source.path}" "-I{build.path}/sketch"  "-I{build.system.path}/drivers/pico-sdk/src/boards/include" "-I{build.system.path}/drivers/pico-sdk/src/common/boot_picoboot/include" "-I{build.system.path}/drivers/pico-sdk/src/common/boot_uf2/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_base/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_binary_info/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_bit_ops/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_divider/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_stdlib/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_sync/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_time/include" "-I{build.system.path}/drivers/pico-sdk/src/common/pico_util/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2040/hardware_regs/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2040/hardware_structs/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_adc/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_base/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_claim/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_clocks/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_divider/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_dma/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_flash/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_gpio/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_i2c/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_interp/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_irq/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_pio/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_pll/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_pwm/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_resets/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_rtc/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_spi/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_sync/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_timer/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_uart/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_vreg/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_watchdog/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/hardware_xosc/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_bootrom/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_double/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_float/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_int64_ops/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_malloc/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_mem_ops/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_multicore/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_platform/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_printf/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_runtime/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_stdio/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_stdio_semihosting/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_stdio_uart/include" "-I{build.system.path}/drivers/pico-sdk/src/rp2_common/pico_stdio_usb/include
+
+compiler.warning_flags=-w
+compiler.warning_flags.none=-w
+compiler.warning_flags.default=
+compiler.warning_flags.more=-Wall
+compiler.warning_flags.all=-Wall -Wextra
+
+compiler.path={runtime.hardware.path}/../../tools/arm-none-eabi-gcc/9.2.1-1.0/bin/
+
+compiler.S.cmd=arm-none-eabi-gcc
+compiler.c.cmd=arm-none-eabi-gcc
+compiler.cpp.cmd=arm-none-eabi-g++
+compiler.ar.cmd=arm-none-eabi-gcc-ar
+compiler.c.elf.cmd=arm-none-eabi-gcc
+
+compiler.libraries.ldflags="-L{build.variant.path}" {build.path}/core/pico/libpico.a
+
+compiler.extra_flags=-mcpu={build.mcu} {build.flags.fp} -mthumb
+
+compiler.S.flags={compiler.extra_flags} -c -x assembler-with-cpp {compiler.pico.extra_include}
+
+compiler.c.flags={compiler.extra_flags} -c {build.flags.optimize} {compiler.warning_flags} -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -MMD {compiler.pico.extra_include}
+
+compiler.cpp.flags={compiler.extra_flags} -c {build.flags.optimize} {compiler.warning_flags} -std={compiler.cpp.std} -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -fno-use-cxa-atexit -MMD {compiler.pico.extra_include}
+
+compiler.ar.flags=rcs
+
+compiler.c.elf.flags=-mcpu={build.mcu} {build.flags.fp} -mthumb {build.flags.optimize} {build.flags.ldspecs} -Wl,--defsym=LD_FLASH_OFFSET={build.flash_offset} -Wl,--defsym=LD_MAX_SIZE={upload.maximum_size} -Wl,--defsym=LD_MAX_DATA_SIZE={upload.maximum_data_size} -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=_entry_point -Wl,--unresolved-symbols=report-all -Wl,--warn-common
+
+compiler.ldflags=
+compiler.size.cmd=arm-none-eabi-size
+compiler.define=-DARDUINO
+
+# These can be overriden in boards.txt
+# hack fixme with proper tinyusb compilation
+build.extra_flags=-DPICO_NO_HARDWARE=0 -DPICO_ON_DEVICE=1 -DTINYUSB_HOST_LINKED
+build.bootloader_flags=
+build.ldscript=ldscript.ld
+
+# These can be overridden in platform.local.txt
+compiler.c.extra_flags=
+compiler.c.elf.extra_flags=
+compiler.cpp.extra_flags=
+compiler.cpp.std=gnu++14
+compiler.S.extra_flags={build.startup_file}
+compiler.ar.extra_flags=
+
+# Build information's
+build.info.flags=-DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DBOARD_NAME="{build.board}"
+
+# Defaults config
+build.startup_file=
+build.flags.fp=
+build.flags.optimize=-Os
+build.flags.ldspecs=--specs=nosys.specs
+build.flash_offset=0
+
+# Pre and post build hooks
+extras.path={build.system.path}/extras
+
+# Run prebuild.sh to create some generated files
+recipe.hooks.prebuild.1.pattern="{extras.path}/prebuild.sh" "{build.path}" "{build.source.path}" "{build.system.path}"
+
+# compile patterns
+# ---------------------
+
+## Compile required pico-sdk objects
+recipe.hooks.core.prebuild.1.pattern="{extras.path}/build.sh" "{build.path}" "{build.source.path}" "{build.system.path}" {compiler.path}{compiler.c.cmd} {compiler.c.flags} {build.info.flags} {compiler.c.extra_flags} {build.extra_flags}
+
+## Link required pico-sdk objects into libpico.a
+recipe.hooks.core.prebuild.2.pattern="{extras.path}/link.sh" "{build.path}" "{build.source.path}" "{build.system.path}" {compiler.path}{compiler.ar.cmd} {compiler.ar.flags} {compiler.ar.extra_flags}
+
+## Compile c files
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {build.info.flags} {compiler.c.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+
+## Compile c++ files
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {build.info.flags} {compiler.cpp.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+
+## Compile S files
+recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {build.info.flags} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+
+## Create archives
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
+
+## Combine gc-sections, archives, and objects
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} "-Wl,--default-script={build.variant.path}/{build.ldscript}" "-Wl,--script={build.system.path}/ldscript.ld" "-Wl,-Map,{build.path}/{build.project_name}.map" {compiler.c.elf.extra_flags} {compiler.ldflags} -o "{build.path}/{build.project_name}.elf" "-L{build.path}" -Wl,--start-group {object_files} {compiler.libraries.ldflags} "{archive_file_path}" -lc -Wl,--end-group -lm -lgcc -lstdc++
+
+## Create output (.uf2 file)
+# todo
+
+## Save binary
+recipe.output.tmp_file={build.project_name}.{build.preferred_out_format}
+recipe.output.save_file={build.project_name}.{build.variant}.{build.preferred_out_format}
+
+## Compute size
+recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
+recipe.size.regex=^(?:\.text|\.data|\.rodata)\s+([0-9]+).*
+recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
+recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
+
+# Uploader tool
+# -------------------
+
+# todo

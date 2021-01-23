@@ -1,0 +1,3 @@
+[submodule "system/drivers/pico-sdk"]
+	path = system/drivers/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk
